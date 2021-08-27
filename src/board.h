@@ -6,6 +6,10 @@
 #define WHITE   0
 #define BLACK   1
 
+#define TOGGLE_BIT(bb, ind) (bb ^= 1ULL << ind)
+#define BIT_IS_SET(bb, ind) ((bb >> ind) & 1ULL)
+#define POP_BIT(bb, ind) (BIT_IS_SET(bb, ind) ? TOGGLE_BIT(bb, ind) : 0)
+
 struct ChessBoard
 {
     uint8_t  side;

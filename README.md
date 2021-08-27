@@ -1,4 +1,4 @@
-# chef v0.0.1
+# chef v0.1.0
 
 `chef` is a chess engine.
 

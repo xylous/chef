@@ -12,7 +12,15 @@
 
 struct ChessBoard
 {
-    uint8_t  side;
+    uint8_t side;
+    uint8_t can_castle_kingside[2];
+    uint8_t can_castle_queenside[2];
+
+    char *en_passant_sqr;
+
+    uint32_t halfmoves;
+    uint32_t fullmoves;
+
     uint64_t rooks[2];
     uint64_t knights[2];
     uint64_t bishops[2];

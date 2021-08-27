@@ -23,5 +23,6 @@ struct ChessBoard
 };
 
 struct ChessBoard *new_chessboard();
+void print_bitboard(uint64_t bb);
 
 #endif

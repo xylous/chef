@@ -9,6 +9,10 @@ void fen_piece_positions(struct ChessBoard **cb, char *str);
 void fen_side_to_play(struct ChessBoard **cb, char *str);
 void fen_castling_availability(struct ChessBoard **cb, char *str);
 
+/**
+ * Given a valid FEN string, return a ChessBoard whose state matches the one
+ * described by said string
+ */
 struct ChessBoard *board_from_fen(char fen[])
 {
     struct ChessBoard *cb = new_chessboard();
@@ -32,11 +36,17 @@ struct ChessBoard *board_from_fen(char fen[])
     return cb;
 }
 
+/**
+ * Given a char representing a digit, return the digit as an int
+ */
 int digit_from_char(char c)
 {
     return c - '0';
 }
 
+/**
+ * Helper function; update `cb` with castling availability, as per `str`
+ */
 void fen_castling_availability(struct ChessBoard **cb, char *str)
 {
     (*cb)->can_castle_kingside[WHITE] = 0;
@@ -65,6 +75,9 @@ void fen_castling_availability(struct ChessBoard **cb, char *str)
     }
 }
 
+/**
+ * Helper function; update the side to play in `cb`
+ */
 void fen_side_to_play(struct ChessBoard **cb, char *str)
 {
     if (*str == 'w') {
@@ -74,6 +87,9 @@ void fen_side_to_play(struct ChessBoard **cb, char *str)
     }
 }
 
+/**
+ * Helper function; update piece positions as per `str`
+ */
 void fen_piece_positions(struct ChessBoard **cb, char *str)
 {
     int sqr = 0;

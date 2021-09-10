@@ -3,12 +3,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/**
+ * Allocate memory for a `struct ChessBoard`, but don't initialise it
+ */
 struct ChessBoard *new_chessboard()
 {
     struct ChessBoard *cb = malloc(sizeof(struct ChessBoard));
     return cb;
 }
 
+/**
+ * Given a bitboard (64 bit unsigned long long), print its contents
+ * Useful for debugging
+ */
 void print_bitboard(uint64_t bb)
 {
     for (int row = 0; row < 8; row++) {

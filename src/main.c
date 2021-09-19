@@ -6,7 +6,7 @@
 
 void print_help_message()
 {
-    printf("chef, v0.1.0");
+    printf("chef, v0.1.0\n");
 
     return;
 }

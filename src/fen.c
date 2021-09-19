@@ -13,8 +13,11 @@ void fen_castling_availability(struct ChessBoard **cb, char *str);
  * Given a valid FEN string, return a ChessBoard whose state matches the one
  * described by said string
  */
-struct ChessBoard *board_from_fen(char fen[])
+struct ChessBoard *board_from_fen(char *str)
 {
+    /* `str` might be a string literal; strtok() needs a modifiable variable */
+    char *fen = strdup(str);
+
     struct ChessBoard *cb = new_chessboard();
     char *positions = strtok(fen, " ");
     fen_piece_positions(&cb, positions);

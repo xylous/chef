@@ -24,7 +24,7 @@ make
 
 ## Roadmap
 
-- [ ] board representation, using bitboards
+- [x] board representation, using bitboards
 - [ ] move generation
 - [ ] CLI interface
 - [ ] interactive interface (stdin)
@@ -41,4 +41,4 @@ Please make sure to update tests as appropriate.
 
 ## License
 
-[MIT](LICENSE)
+[GPLv3](./LICENSE)

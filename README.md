@@ -4,6 +4,8 @@
 
 It's still in its development phase, and not usable!
 
+For a detailed history of the project, check [the Changelog](./Changelog.md)
+
 ## Getting started
 
 ### Reguirements

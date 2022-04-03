@@ -27,8 +27,12 @@ make
 ## Roadmap
 
 - [x] board representation, using bitboards
+- [x] printing a chess board
+- [ ] REPL
+    - [ ] be able to move anywhere without checking for valid moves
+    - [ ] check if the move performed is legal
 - [ ] move generation
-- [ ] CLI interface
+- [ ] ~~CLI interface~~
 - [ ] interactive interface (stdin)
 - [ ] opening book
 - [ ] 500  ELO

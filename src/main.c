@@ -30,6 +30,10 @@ void print_help_message()
 int main(int argc, char *argv[])
 {
     print_help_message();
+    /*
+     * struct ChessBoard *b = board_from_fen("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
+     * print_chessboard(b);
+     */
 
     return 0;
 }

@@ -48,5 +48,6 @@ struct ChessBoard
 
 struct ChessBoard *new_chessboard();
 void print_bitboard(uint64_t bb);
+void print_chessboard(struct ChessBoard *b);
 
 #endif

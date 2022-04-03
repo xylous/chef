@@ -95,3 +95,28 @@ char *chessboard_to_string(struct ChessBoard *b)
 
     return str;
 }
+
+/**
+ * Given a ChessBoard, print it to the console
+ */
+void print_chessboard(struct ChessBoard *board)
+{
+    char *str = chessboard_to_string(board);
+    for (int i = 0; i < 64; i++) {
+        switch (str[i]) {
+            case '\0':
+                printf("-");
+                break;
+            default:
+                printf("%c", str[i]);
+                break;
+        }
+        if ((i + 1) % 8 == 0) {
+            printf("\n");
+        } else {
+            printf(" ");
+        }
+    }
+
+    return;
+}

@@ -49,3 +49,49 @@ void print_bitboard(uint64_t bb)
 
     return;
 }
+
+/**
+ * Given a ChessBoard, turn it into a printable and semi-understandable string
+ */
+char *chessboard_to_string(struct ChessBoard *b)
+{
+    char *str = calloc(64, sizeof(char));
+
+    for (int side = 0; side < 2; side++) {
+        for (int i = 0; i < 64; i++) {
+            if (BIT_IS_SET(b->rooks[side], i)) {
+                if (side == WHITE)
+                    str[i] = 'R';
+                else
+                    str[i] = 'r';
+            } else if (BIT_IS_SET(b->knights[side], i)) {
+                if (side == WHITE)
+                    str[i] = 'N';
+                else
+                    str[i] = 'n';
+            } else if (BIT_IS_SET(b->bishops[side], i)) {
+                if (side == WHITE)
+                    str[i] = 'B';
+                else
+                    str[i] = 'b';
+            } else if (BIT_IS_SET(b->queens[side], i)) {
+                if (side == WHITE)
+                    str[i] = 'Q';
+                else
+                    str[i] = 'q';
+            } else if (BIT_IS_SET(b->kings[side], i)) {
+                if (side == WHITE)
+                    str[i] = 'K';
+                else
+                    str[i] = 'k';
+            } else if (BIT_IS_SET(b->pawns[side], i)) {
+                if (side == WHITE)
+                    str[i] = 'P';
+                else
+                    str[i] = 'p';
+            }
+        }
+    }
+
+    return str;
+}

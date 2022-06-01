@@ -27,6 +27,7 @@ void fen_decode_castling_availability(struct ChessBoard **cb, char *str);
 char *fen_encode_piece_positions(struct ChessBoard *cb);
 char *fen_encode_side_to_play(struct ChessBoard *cb);
 char *fen_encode_castling_availability(struct ChessBoard *cb);
+char *fen_encode_clock_info(struct ChessBoard *cb);
 
 /**
  * Given a valid FEN string, return a ChessBoard whose state matches the one
@@ -241,4 +242,15 @@ char *fen_encode_piece_positions(struct ChessBoard *b)
     }
 
     return str;
+}
+
+/**
+ * Helper function: return a part of the FEN string for the side to play
+ */
+char *fen_encode_side_to_play(struct ChessBoard *cb)
+{
+    if (cb->side == WHITE)
+        return "w";
+    else
+        return "b";
 }

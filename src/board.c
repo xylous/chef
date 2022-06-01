@@ -16,6 +16,7 @@
 
 #include "board.h"
 
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -119,4 +120,28 @@ void print_chessboard(struct ChessBoard *board)
     }
 
     return;
+}
+
+/**
+ * Return a bitboard containing all pieces for the given side
+ */
+uint64_t pieces_bitboard(struct ChessBoard *b, int side)
+{
+    uint64_t result = 0;
+    for (int i = 0; i < 64; i++) {
+        if (BIT_IS_SET(b->rooks[side], i)) {
+            TOGGLE_BIT(result, i);
+        } else if (BIT_IS_SET(b->knights[side], i)) {
+            TOGGLE_BIT(result, i);
+        } else if (BIT_IS_SET(b->bishops[side], i)) {
+            TOGGLE_BIT(result, i);
+        } else if (BIT_IS_SET(b->queens[side], i)) {
+            TOGGLE_BIT(result, i);
+        } else if (BIT_IS_SET(b->kings[side], i)) {
+            TOGGLE_BIT(result, i);
+        } else if (BIT_IS_SET(b->pawns[side], i)) {
+            TOGGLE_BIT(result, i);
+        }
+    }
+    return result;
 }

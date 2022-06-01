@@ -21,9 +21,12 @@
 #include <string.h>
 
 int digit_from_char(char c);
-void fen_piece_positions(struct ChessBoard **cb, char *str);
-void fen_side_to_play(struct ChessBoard **cb, char *str);
-void fen_castling_availability(struct ChessBoard **cb, char *str);
+void fen_decode_piece_positions(struct ChessBoard **cb, char *str);
+void fen_decode_side_to_play(struct ChessBoard **cb, char *str);
+void fen_decode_castling_availability(struct ChessBoard **cb, char *str);
+char *fen_encode_piece_positions(struct ChessBoard *cb);
+char *fen_encode_side_to_play(struct ChessBoard *cb);
+char *fen_encode_castling_availability(struct ChessBoard *cb);
 
 /**
  * Given a valid FEN string, return a ChessBoard whose state matches the one
@@ -36,13 +39,13 @@ struct ChessBoard *board_from_fen(char *str)
 
     struct ChessBoard *cb = new_chessboard();
     char *positions = strtok(fen, " ");
-    fen_piece_positions(&cb, positions);
+    fen_decode_piece_positions(&cb, positions);
 
     char *side = strtok(NULL, " ");
-    fen_side_to_play(&cb, side);
+    fen_decode_side_to_play(&cb, side);
 
     char *castling = strtok(NULL, " ");
-    fen_castling_availability(&cb, castling);
+    fen_decode_castling_availability(&cb, castling);
 
     char *en_passant_sqr = strtok(NULL, " ");
     cb->en_passant_sqr = en_passant_sqr;
@@ -69,7 +72,7 @@ int digit_from_char(char c)
 /**
  * Helper function; update `cb` with castling availability, as per `str`
  */
-void fen_castling_availability(struct ChessBoard **cb, char *str)
+void fen_decode_castling_availability(struct ChessBoard **cb, char *str)
 {
     (*cb)->can_castle_kingside[WHITE] = 0;
     (*cb)->can_castle_queenside[WHITE] = 0;
@@ -100,7 +103,7 @@ void fen_castling_availability(struct ChessBoard **cb, char *str)
 /**
  * Helper function; update the side to play in `cb`
  */
-void fen_side_to_play(struct ChessBoard **cb, char *str)
+void fen_decode_side_to_play(struct ChessBoard **cb, char *str)
 {
     if (*str == 'w') {
         (*cb)->side = WHITE;
@@ -112,7 +115,7 @@ void fen_side_to_play(struct ChessBoard **cb, char *str)
 /**
  * Helper function; update piece positions as per `str`
  */
-void fen_piece_positions(struct ChessBoard **cb, char *str)
+void fen_decode_piece_positions(struct ChessBoard **cb, char *str)
 {
     int sqr = 0;
     int len = strlen(str);

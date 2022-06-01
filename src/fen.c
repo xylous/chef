@@ -254,3 +254,32 @@ char *fen_encode_side_to_play(struct ChessBoard *cb)
     else
         return "b";
 }
+
+/**
+ * Helper function: return a part of the FEN string for the castling
+ * availability
+ */
+char *fen_encode_castling_availability(struct ChessBoard *cb)
+{
+    char *str = calloc(5, sizeof(char));
+
+    if (cb->can_castle_kingside[WHITE]) {
+        strcat(str, "K");
+    }
+    if (cb->can_castle_queenside[WHITE]) {
+        strcat(str, "Q");
+    }
+    if (cb->can_castle_kingside[BLACK]) {
+        strcat(str, "k");
+    }
+    if (cb->can_castle_queenside[BLACK]) {
+        strcat(str, "q");
+    }
+
+    // check if there isn't castling availability
+    if (strlen(str) == 0) {
+        str[0] = '-';
+    };
+
+    return str;
+}

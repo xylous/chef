@@ -18,5 +18,6 @@
 #define CHEF_FEN_H
 
 struct ChessBoard *board_from_fen(char *str);
+char *fen_from_board(struct ChessBoard *b);
 
 #endif

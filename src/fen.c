@@ -64,6 +64,23 @@ struct ChessBoard *board_from_fen(char *str)
 }
 
 /**
+ * Generate a FEN string, given a ChessBoard
+ */
+char *fen_from_board(struct ChessBoard *cb)
+{
+    char *str = calloc(100, sizeof(char));
+
+    char *positions = fen_encode_piece_positions(cb);
+    char *side = fen_encode_side_to_play(cb);
+    char *castling =  fen_encode_castling_availability(cb);
+    char *moves = fen_encode_clock_info(cb);
+
+    sprintf(str, "%s %s %s %s %s", positions, side, castling, cb->en_passant_sqr, moves);
+
+    return str;
+}
+
+/**
  * Given a char representing a digit, return the digit as an int
  */
 int digit_from_char(char c)

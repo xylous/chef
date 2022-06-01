@@ -172,3 +172,70 @@ void fen_piece_positions(struct ChessBoard **cb, char *str)
 
     return;
 }
+
+/**
+ * Helper function: create a string containing the piece positions
+ */
+char *fen_encode_piece_positions(struct ChessBoard *b)
+{
+    char *str = calloc(64, sizeof(char));
+    int seen_block = 0;
+    int seen_blanks = 0;
+    uint64_t pieces_heatmap = b->pieces[WHITE] ^ b->pieces[BLACK];
+
+    for (int i = 0; i < 64; i++) {
+        for (int side = 0; side < 2; side++) {
+            if (BIT_IS_SET(b->rooks[side], i)) {
+                if (side == WHITE)
+                    strcat(str, "R");
+                else
+                    strcat(str, "r");
+            } else if (BIT_IS_SET(b->knights[side], i)) {
+                if (side == WHITE)
+                    strcat(str, "N");
+                else
+                    strcat(str, "n");
+            } else if (BIT_IS_SET(b->bishops[side], i)) {
+                if (side == WHITE)
+                    strcat(str, "B");
+                else
+                    strcat(str, "b");
+            } else if (BIT_IS_SET(b->queens[side], i)) {
+                if (side == WHITE)
+                    strcat(str, "Q");
+                else
+                    strcat(str, "q");
+            } else if (BIT_IS_SET(b->kings[side], i)) {
+                if (side == WHITE)
+                    strcat(str, "K");
+                else
+                    strcat(str, "k");
+            } else if (BIT_IS_SET(b->pawns[side], i)) {
+                if (side == WHITE)
+                    strcat(str, "P");
+                else
+                    strcat(str, "p");
+            }
+        }
+        seen_block++;
+
+        if (!BIT_IS_SET(pieces_heatmap, i)) {
+            seen_blanks++;
+        }
+
+        if (seen_blanks > 0
+                && (seen_block == 8
+                    || BIT_IS_SET(pieces_heatmap, (i+1)))) {
+            char digit = seen_blanks + '0';
+            strcat(str, &digit);
+            seen_blanks = 0;
+        }
+
+        if (seen_block == 8 && i != 63) {
+            strcat(str, "/");
+            seen_block = 0;
+        }
+    }
+
+    return str;
+}

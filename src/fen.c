@@ -52,6 +52,9 @@ struct ChessBoard *board_from_fen(char *str)
     cb->halfmoves = atoi(halfmoves);
     cb->fullmoves = atoi(fullmoves);
 
+    cb->pieces[WHITE] = pieces_bitboard(cb, WHITE);
+    cb->pieces[BLACK] = pieces_bitboard(cb, BLACK);
+
     return cb;
 }
 

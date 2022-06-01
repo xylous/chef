@@ -17,6 +17,7 @@
 #include "board.h"
 #include "fen.h"
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -280,6 +281,18 @@ char *fen_encode_castling_availability(struct ChessBoard *cb)
     if (strlen(str) == 0) {
         str[0] = '-';
     };
+
+    return str;
+}
+
+/**
+ * Helper function: return a part of the FEN string with clock/move information
+ */
+char *fen_encode_clock_info(struct ChessBoard *cb)
+{
+    char *str = calloc(10, sizeof(char));
+
+    sprintf(str, "%d %d", cb->halfmoves, cb->fullmoves);
 
     return str;
 }

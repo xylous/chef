@@ -20,6 +20,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#define DEFAULT_FEN_STRING "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+
 void print_help_message()
 {
     printf("chef, v0.1.0\n");
@@ -30,10 +32,9 @@ void print_help_message()
 int main(int argc, char *argv[])
 {
     print_help_message();
-    /*
-     * struct ChessBoard *b = board_from_fen("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
-     * print_chessboard(b);
-     */
+
+    /*struct ChessBoard *b = board_from_fen(DEFAULT_FEN_STRING);*/
+    /*print_chessboard(b);*/
 
     return 0;
 }

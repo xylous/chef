@@ -34,7 +34,7 @@ char *fen_encode_clock_info(struct ChessBoard *cb);
  * Given a valid FEN string, return a ChessBoard whose state matches the one
  * described by said string
  */
-struct ChessBoard *board_from_fen(char *str)
+struct ChessBoard *cboard_from_fen(char *str)
 {
     /* `str` might be a string literal; strtok() needs a modifiable variable */
     char *fen = strdup(str);
@@ -198,41 +198,41 @@ void fen_decode_piece_positions(struct ChessBoard **cb, char *str)
 /**
  * Helper function: create a string containing the piece positions
  */
-char *fen_encode_piece_positions(struct ChessBoard *b)
+char *fen_encode_piece_positions(struct ChessBoard *cb)
 {
     char *str = calloc(64, sizeof(char));
     int seen_block = 0;
     int seen_blanks = 0;
-    uint64_t pieces_heatmap = b->pieces[WHITE] ^ b->pieces[BLACK];
+    uint64_t pieces_heatmap = cb->pieces[WHITE] ^ cb->pieces[BLACK];
 
     for (int i = 0; i < 64; i++) {
         for (int side = 0; side < 2; side++) {
-            if (BIT_IS_SET(b->rooks[side], i)) {
+            if (BIT_IS_SET(cb->rooks[side], i)) {
                 if (side == WHITE)
                     strcat(str, "R");
                 else
                     strcat(str, "r");
-            } else if (BIT_IS_SET(b->knights[side], i)) {
+            } else if (BIT_IS_SET(cb->knights[side], i)) {
                 if (side == WHITE)
                     strcat(str, "N");
                 else
                     strcat(str, "n");
-            } else if (BIT_IS_SET(b->bishops[side], i)) {
+            } else if (BIT_IS_SET(cb->bishops[side], i)) {
                 if (side == WHITE)
                     strcat(str, "B");
                 else
                     strcat(str, "b");
-            } else if (BIT_IS_SET(b->queens[side], i)) {
+            } else if (BIT_IS_SET(cb->queens[side], i)) {
                 if (side == WHITE)
                     strcat(str, "Q");
                 else
                     strcat(str, "q");
-            } else if (BIT_IS_SET(b->kings[side], i)) {
+            } else if (BIT_IS_SET(cb->kings[side], i)) {
                 if (side == WHITE)
                     strcat(str, "K");
                 else
                     strcat(str, "k");
-            } else if (BIT_IS_SET(b->pawns[side], i)) {
+            } else if (BIT_IS_SET(cb->pawns[side], i)) {
                 if (side == WHITE)
                     strcat(str, "P");
                 else

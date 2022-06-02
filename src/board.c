@@ -54,38 +54,38 @@ void print_bitboard(uint64_t bb)
 /**
  * Given a ChessBoard, turn it into a printable and semi-understandable string
  */
-char *chessboard_to_string(struct ChessBoard *b)
+char *chessboard_to_string(struct ChessBoard *cb)
 {
     char *str = calloc(64, sizeof(char));
 
     for (int side = 0; side < 2; side++) {
         for (int i = 0; i < 64; i++) {
-            if (BIT_IS_SET(b->rooks[side], i)) {
+            if (BIT_IS_SET(cb->rooks[side], i)) {
                 if (side == WHITE)
                     str[i] = 'R';
                 else
                     str[i] = 'r';
-            } else if (BIT_IS_SET(b->knights[side], i)) {
+            } else if (BIT_IS_SET(cb->knights[side], i)) {
                 if (side == WHITE)
                     str[i] = 'N';
                 else
                     str[i] = 'n';
-            } else if (BIT_IS_SET(b->bishops[side], i)) {
+            } else if (BIT_IS_SET(cb->bishops[side], i)) {
                 if (side == WHITE)
                     str[i] = 'B';
                 else
                     str[i] = 'b';
-            } else if (BIT_IS_SET(b->queens[side], i)) {
+            } else if (BIT_IS_SET(cb->queens[side], i)) {
                 if (side == WHITE)
                     str[i] = 'Q';
                 else
                     str[i] = 'q';
-            } else if (BIT_IS_SET(b->kings[side], i)) {
+            } else if (BIT_IS_SET(cb->kings[side], i)) {
                 if (side == WHITE)
                     str[i] = 'K';
                 else
                     str[i] = 'k';
-            } else if (BIT_IS_SET(b->pawns[side], i)) {
+            } else if (BIT_IS_SET(cb->pawns[side], i)) {
                 if (side == WHITE)
                     str[i] = 'P';
                 else
@@ -100,9 +100,9 @@ char *chessboard_to_string(struct ChessBoard *b)
 /**
  * Given a ChessBoard, print it to the console
  */
-void print_chessboard(struct ChessBoard *board)
+void print_chessboard(struct ChessBoard *cb)
 {
-    char *str = chessboard_to_string(board);
+    char *str = chessboard_to_string(cb);
     for (int i = 0; i < 64; i++) {
         switch (str[i]) {
             case '\0':
@@ -125,21 +125,21 @@ void print_chessboard(struct ChessBoard *board)
 /**
  * Return a bitboard containing all pieces for the given side
  */
-uint64_t pieces_bitboard(struct ChessBoard *b, int side)
+uint64_t pieces_bitboard(struct ChessBoard *cb, int side)
 {
     uint64_t result = 0;
     for (int i = 0; i < 64; i++) {
-        if (BIT_IS_SET(b->rooks[side], i)) {
+        if (BIT_IS_SET(cb->rooks[side], i)) {
             TOGGLE_BIT(result, i);
-        } else if (BIT_IS_SET(b->knights[side], i)) {
+        } else if (BIT_IS_SET(cb->knights[side], i)) {
             TOGGLE_BIT(result, i);
-        } else if (BIT_IS_SET(b->bishops[side], i)) {
+        } else if (BIT_IS_SET(cb->bishops[side], i)) {
             TOGGLE_BIT(result, i);
-        } else if (BIT_IS_SET(b->queens[side], i)) {
+        } else if (BIT_IS_SET(cb->queens[side], i)) {
             TOGGLE_BIT(result, i);
-        } else if (BIT_IS_SET(b->kings[side], i)) {
+        } else if (BIT_IS_SET(cb->kings[side], i)) {
             TOGGLE_BIT(result, i);
-        } else if (BIT_IS_SET(b->pawns[side], i)) {
+        } else if (BIT_IS_SET(cb->pawns[side], i)) {
             TOGGLE_BIT(result, i);
         }
     }
